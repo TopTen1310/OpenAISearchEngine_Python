@@ -48,7 +48,16 @@ async def search():
     # Close the connection.
     await conn.close()
 
-    return results
+    response = []
+    for result in results:
+        response.append({
+            "name": result.name,
+            "manufacturer": result.manufacturer,
+            "model": result.model,
+            "location": result.location,
+            "price": result.price
+        })
+    return response
 
 if __name__ == "__main__":
     app.run()
