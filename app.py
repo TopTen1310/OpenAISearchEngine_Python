@@ -49,13 +49,14 @@ async def search():
     await conn.close()
 
     response = []
-    for i in range(10):
+    for result in results:
         response.append({
-            "name": results[i]["name"],
-            "manufacturer": results[i]["manufacturer"],
-            "model": results[i]["model"],
-            "location": results[i]["location"],
-            "price": results[i]["price"],
+            "id": result["id"],
+            "name": result["name"],
+            "manufacturer": result["manufacturer"],
+            "model": result["model"],
+            "location": result["location"],
+            "price": result["price"],
         })
     
     return response
