@@ -48,6 +48,7 @@ async def search():
     # Close the connection.
     await conn.close()
 
+    print(ids)
     response = []
     for result in results:
         response.append({
