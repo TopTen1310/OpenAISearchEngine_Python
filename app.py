@@ -39,24 +39,25 @@ async def search():
     }, rows))
 
     similarities = sorted(
-        similarities, key=lambda x: x["score"], reverse=True)[:10]
+        similarities, key=lambda x: x["score"], reverse=True)[:5]
     ids = list(map(lambda x: x["id"], similarities))
 
     conn = await asyncpg.connect(host="c.machinesearchdb.postgres.database.azure.com", user="citus", database="citus", password="FastSearchEngine123")
-    results = await conn.fetch('SELECT name, manufacturer, model, location, price FROM machinelist WHERE id = ANY($1)', ids)
+    results = await conn.fetch('SELECT id, name, manufacturer, model, location, price FROM machinelist WHERE id = ANY($1) ORDER BY array_position($1, machinelist.id)', ids)
 
     # Close the connection.
     await conn.close()
 
     response = []
-    for result in results:
+    for i in range(10):
         response.append({
-            "name": result["name"],
-            "manufacturer": result["manufacturer"],
-            "model": result["model"],
-            "location": result["location"],
-            "price": result["price"]
+            "name": results[i]["name"],
+            "manufacturer": results[i]["manufacturer"],
+            "model": results[i]["model"],
+            "location": results[i]["location"],
+            "price": results[i]["price"],
         })
+    
     return response
 
 if __name__ == "__main__":
