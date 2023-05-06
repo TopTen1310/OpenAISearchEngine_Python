@@ -27,7 +27,7 @@ async def startup():
 @app.route("/")
 async def search():
     user_input = request.args.get("q")
-
+    print("User input: ", user_input)
     if user_input == None:
         return { "message": "No query provided." }
 
