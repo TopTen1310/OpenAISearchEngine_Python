@@ -51,11 +51,11 @@ async def search():
     response = []
     for result in results:
         response.append({
-            "name": result.name,
-            "manufacturer": result.manufacturer,
-            "model": result.model,
-            "location": result.location,
-            "price": result.price
+            "name": result["name"],
+            "manufacturer": result["manufacturer"],
+            "model": result["model"],
+            "location": result["location"],
+            "price": result["price"]
         })
     return response
 
