@@ -2,7 +2,6 @@ import os
 import openai
 import numpy as np
 
-
 class Engine:
     def __init__(self) -> None:
         self.openai = openai
