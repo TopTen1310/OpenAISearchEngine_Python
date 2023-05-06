@@ -28,7 +28,7 @@ async def startup():
 async def search():
     user_input = request.args.get("q")
     print("User input: ", user_input)
-    if user_input == None:
+    if user_input == None or user_input == "":
         return { "message": "No query provided." }
 
     user_embedding = engine.get_embedding([user_input])[0]
