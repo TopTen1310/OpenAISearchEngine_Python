@@ -16,7 +16,7 @@ filename = "embedding.csv"
 async def main():
     conn = await asyncpg.connect(host="c.machinesearchdb.postgres.database.azure.com", user="citus", database="citus", password="FastSearchEngine123")
 
-    rows = await conn.fetch('SELECT id, embedding FROM machinelist')
+    rows = await conn.fetch('SELECT id, embedding FROM machinelist LIMIT 10000')
 
     # writing to csv file 
     with open(filename, 'w') as csvfile: 
